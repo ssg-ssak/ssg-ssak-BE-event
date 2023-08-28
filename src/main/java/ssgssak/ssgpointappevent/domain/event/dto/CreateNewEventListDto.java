@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ssgssak.ssgpointappevent.domain.event.entity.EventType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder
@@ -13,8 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class CreateNewEventListDto {
-    private String startDate;
-    private String endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private EventType eventType;
     private Boolean isOver;
 }

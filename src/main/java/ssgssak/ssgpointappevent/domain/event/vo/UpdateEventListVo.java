@@ -1,8 +1,9 @@
 package ssgssak.ssgpointappevent.domain.event.vo;
 
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /*
 이벤트 시작일, 종료일, 이벤트타입 중 수정 가능한 것은 종료일 뿐이기 때문에 종료일만 받는다.
@@ -10,5 +11,6 @@ import java.time.LocalDateTime;
  */
 @Getter
 public class UpdateEventListVo {
-    private String endDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
 }

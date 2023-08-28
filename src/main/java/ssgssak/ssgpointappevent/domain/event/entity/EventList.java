@@ -2,10 +2,7 @@ package ssgssak.ssgpointappevent.domain.event.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@ToString
 public class EventList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
