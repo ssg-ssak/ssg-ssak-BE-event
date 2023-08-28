@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import ssgssak.ssgpointappevent.domain.event.entity.EventType;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor

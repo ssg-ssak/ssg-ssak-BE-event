@@ -10,7 +10,6 @@ import ssgssak.ssgpointappevent.domain.event.dto.UpdateEventListDto;
 import ssgssak.ssgpointappevent.domain.event.entity.EventList;
 import ssgssak.ssgpointappevent.domain.event.infrastructure.EventListRepository;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 

@@ -7,7 +7,7 @@ import ssgssak.ssgpointappevent.domain.event.entity.EventType;
 import java.time.LocalDate;
 
 @Getter
-public class CreateNewEventListVo {
+public class CreateEventListVo {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
