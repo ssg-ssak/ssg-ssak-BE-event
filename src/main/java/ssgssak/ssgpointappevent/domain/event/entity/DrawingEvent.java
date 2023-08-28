@@ -13,12 +13,11 @@ import lombok.NoArgsConstructor;
 @Getter
 public class DrawingEvent {
     @Id
-    private Long eventListId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "event_list_id")
-    private EventList eventList;
+    @Column(nullable = false, name = "event_list_id")
+    private Long eventListId;
 
     @Column(nullable = false, name = "title")
     private String title;

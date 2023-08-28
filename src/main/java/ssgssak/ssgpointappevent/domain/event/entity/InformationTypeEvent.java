@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 public class InformationTypeEvent { // 조회형 이벤트
     // 식별 관계 매핑
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, name = "event_list_id")
     private Long eventListId;
-    @MapsId // EventList의 PK를 FK로 사용(EventListId로 매핑)
-    @OneToOne
-    @JoinColumn(name = "event_list_id")
-    private EventList eventList;
 
     @Column(nullable = false, name = "title")
     private String title;

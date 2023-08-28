@@ -1,17 +1,18 @@
 package ssgssak.ssgpointappevent.domain.event.dto;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ssgssak.ssgpointappevent.domain.event.entity.EventList;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class UpdateEventListDto {
-    private LocalDate endDate;
+public class ReadEventsDto {
+    private List<EventList> events;
 }
