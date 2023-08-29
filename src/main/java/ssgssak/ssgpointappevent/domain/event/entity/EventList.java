@@ -3,6 +3,7 @@ package ssgssak.ssgpointappevent.domain.event.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @ToString
+@DynamicUpdate
 public class EventList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

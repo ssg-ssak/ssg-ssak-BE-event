@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicUpdate
 public class RedirectionEvent { // 페이지 이동형 이벤트
     // 식별 관계 매핑
     @Id
@@ -31,4 +33,11 @@ public class RedirectionEvent { // 페이지 이동형 이벤트
 
     @Column(nullable = false, name = "redirection_url")
     private String redirectionUrl;
+
+    public void updateRedirectionEvent(String title, String titleImageUrl, String contentsImageUrl, String redirectionUrl) {
+        this.title = title;
+        this.titleImageUrl = titleImageUrl;
+        this.contentsImageUrl = contentsImageUrl;
+        this.redirectionUrl = redirectionUrl;
+    }
 }

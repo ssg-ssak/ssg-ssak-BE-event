@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Builder(toBuilder = true)
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicUpdate
 public class InformationTypeEvent { // 조회형 이벤트
     // 식별 관계 매핑
     @Id
@@ -28,4 +30,10 @@ public class InformationTypeEvent { // 조회형 이벤트
 
     @Column(nullable = false, name = "contents_image url")
     private String contentsImageUrl;
+
+    public void updateInformationTypeEvent(String title, String titleImageUrl, String contentsImageUrl){
+        this.title = title;
+        this.titleImageUrl = titleImageUrl;
+        this.contentsImageUrl = contentsImageUrl;
+    }
 }
