@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class CreateNewEventListDto {
+public class CreateEventListDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private EventType eventType;

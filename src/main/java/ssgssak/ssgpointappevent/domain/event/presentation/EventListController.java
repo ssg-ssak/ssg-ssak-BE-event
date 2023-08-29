@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ssgssak.ssgpointappevent.domain.event.application.EventListServiceImpl;
-import ssgssak.ssgpointappevent.domain.event.dto.CreateNewEventListDto;
+import ssgssak.ssgpointappevent.domain.event.dto.CreateEventListDto;
 import ssgssak.ssgpointappevent.domain.event.dto.ReadEventsDto;
 import ssgssak.ssgpointappevent.domain.event.dto.UpdateEventListDto;
 import ssgssak.ssgpointappevent.domain.event.vo.CreateEventListVo;
@@ -32,7 +32,7 @@ public class EventListController {
     // 1. 새로운 이벤트 생성
     @PostMapping("/admin")
     public void createEventList(@RequestBody CreateEventListVo createNewEventListVo){
-        CreateNewEventListDto eventListInfoDto = modelMapper.map(createNewEventListVo, CreateNewEventListDto.class);
+        CreateEventListDto eventListInfoDto = modelMapper.map(createNewEventListVo, CreateEventListDto.class);
         eventListService.createEventList(eventListInfoDto);
     }
 

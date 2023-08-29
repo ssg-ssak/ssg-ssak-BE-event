@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import ssgssak.ssgpointappevent.domain.event.dto.CreateNewEventListDto;
+import org.springframework.transaction.annotation.Transactional;
+import ssgssak.ssgpointappevent.domain.event.dto.CreateEventListDto;
 import ssgssak.ssgpointappevent.domain.event.dto.ReadEventsDto;
 import ssgssak.ssgpointappevent.domain.event.dto.UpdateEventListDto;
 import ssgssak.ssgpointappevent.domain.event.entity.EventList;
@@ -16,6 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class EventListServiceImpl {
     private final EventListRepository eventListRepository;
     private final ModelMapper modelMapper;
@@ -26,7 +28,7 @@ public class EventListServiceImpl {
      */
 
     // 1. 새로운 이벤트 생성
-    public void createEventList(CreateNewEventListDto eventListInfoDto) {
+    public void createEventList(CreateEventListDto eventListInfoDto) {
         log.info("eventListInfoDto : " + eventListInfoDto);
         EventList newEvent = modelMapper.map(eventListInfoDto, EventList.class);
         eventListRepository.save(newEvent);
@@ -37,10 +39,10 @@ public class EventListServiceImpl {
         EventList eventList = eventListRepository.findById(eventListId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 이벤트가 존재하지 않습니다."));
         eventList.changeEndDate(updateEventListDto.getEndDate());
-        eventListRepository.save(eventList);
     }
 
     // 3. 진행 이벤트 최신순으로 받아오기
+    @Transactional(readOnly = true)
     public ReadEventsDto getLatestEvents() {
         List<EventList> events = eventListRepository.findAllByIsOverOrderByStartDateDesc(false);
         log.info("events : " + events);
@@ -49,6 +51,7 @@ public class EventListServiceImpl {
     }
 
     // 4. 진행 이벤트 마감임박순으로 받아오기
+    @Transactional(readOnly = true)
     public ReadEventsDto getImminentEvents() {
         List<EventList> events = eventListRepository.findAllByIsOverOrderByEndDateAsc(false);
         log.info("events : " + events);
