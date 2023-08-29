@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import ssgssak.ssgpointappevent.domain.event.entity.EventList;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface EventListRepository extends JpaRepository<EventList, Long> {

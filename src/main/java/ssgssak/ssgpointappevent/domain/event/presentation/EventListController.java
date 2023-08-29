@@ -10,8 +10,8 @@ import ssgssak.ssgpointappevent.domain.event.application.EventListServiceImpl;
 import ssgssak.ssgpointappevent.domain.event.dto.CreateNewEventListDto;
 import ssgssak.ssgpointappevent.domain.event.dto.ReadEventsDto;
 import ssgssak.ssgpointappevent.domain.event.dto.UpdateEventListDto;
-import ssgssak.ssgpointappevent.domain.event.vo.CreateNewEventListVo;
-import ssgssak.ssgpointappevent.domain.event.vo.GetEventsOutputVo;
+import ssgssak.ssgpointappevent.domain.event.vo.CreateEventListVo;
+import ssgssak.ssgpointappevent.domain.event.vo.GetEventsVo;
 import ssgssak.ssgpointappevent.domain.event.vo.UpdateEventListVo;
 
 @RestController
@@ -30,15 +30,16 @@ public class EventListController {
     */
 
     // 1. 새로운 이벤트 생성
-    @PostMapping("/admin/create")
-    public void createEventList(@RequestBody CreateNewEventListVo createNewEventListVo){
+    @PostMapping("/admin")
+    public void createEventList(@RequestBody CreateEventListVo createNewEventListVo){
         CreateNewEventListDto eventListInfoDto = modelMapper.map(createNewEventListVo, CreateNewEventListDto.class);
         eventListService.createEventList(eventListInfoDto);
     }
 
     // 2. 이벤트 정보수정(종료일 변경)
-    @PutMapping("/admin/update/{eventListId}")
-    public void updateEventList(@RequestBody UpdateEventListVo updateEventListVo, @PathVariable Long eventListId){
+    @PutMapping("/admin")
+    public void updateEventList(@RequestBody UpdateEventListVo updateEventListVo,
+                                @RequestParam(name = "id") Long eventListId){
         UpdateEventListDto updateEventListDto = modelMapper.map(updateEventListVo, UpdateEventListDto.class);
         eventListService.changeEventListEndDate(updateEventListDto, eventListId);
     }
@@ -51,18 +52,18 @@ public class EventListController {
 
     // 1. 진행 이벤트 조회하기(최신순)
     @GetMapping("/latest-order")
-    public ResponseEntity<GetEventsOutputVo> getLatestEvents() {
+    public ResponseEntity<GetEventsVo> getLatestEvents() {
         ReadEventsDto readEventsDto = eventListService.getLatestEvents();
-        GetEventsOutputVo getEventsOutputVo = modelMapper.map(readEventsDto, GetEventsOutputVo.class);
+        GetEventsVo getEventsOutputVo = modelMapper.map(readEventsDto, GetEventsVo.class);
         return new ResponseEntity<>(getEventsOutputVo, HttpStatus.OK);
     }
 
     // 2. 진행 이벤트 조회하기(마감임박순)
     @GetMapping("/imminent-order")
-    public ResponseEntity<GetEventsOutputVo> getImminentEvents() {
+    public ResponseEntity<GetEventsVo> getImminentEvents() {
         ReadEventsDto readEventsDto = eventListService.getImminentEvents();
         log.info("readEventsDto : " + readEventsDto);
-        GetEventsOutputVo getEventsOutputVo = modelMapper.map(readEventsDto, GetEventsOutputVo.class);
+        GetEventsVo getEventsOutputVo = modelMapper.map(readEventsDto, GetEventsVo.class);
         log.info("getEventsOutputVo : " + getEventsOutputVo);
         return new ResponseEntity<>(getEventsOutputVo, HttpStatus.OK);
     }

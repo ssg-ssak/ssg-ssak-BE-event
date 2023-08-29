@@ -12,6 +12,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetEventsOutputVo {
+public class GetEventsVo {
     List<EventList> events;
 }
