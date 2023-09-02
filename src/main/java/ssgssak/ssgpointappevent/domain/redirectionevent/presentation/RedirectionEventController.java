@@ -9,9 +9,9 @@ import ssgssak.ssgpointappevent.domain.redirectionevent.application.RedirectionE
 import ssgssak.ssgpointappevent.domain.redirectionevent.dto.CreateRedirectionEventDto;
 import ssgssak.ssgpointappevent.domain.redirectionevent.dto.GetRedirectionEventDto;
 import ssgssak.ssgpointappevent.domain.redirectionevent.dto.UpdateRedirectionEventDto;
-import ssgssak.ssgpointappevent.domain.redirectionevent.vo.CreateRedirectionEventVo;
-import ssgssak.ssgpointappevent.domain.redirectionevent.vo.GetRedirectionEventVo;
-import ssgssak.ssgpointappevent.domain.redirectionevent.vo.UpdateRedirectionEventVo;
+import ssgssak.ssgpointappevent.domain.redirectionevent.vo.CreateRedirectionEventInputVo;
+import ssgssak.ssgpointappevent.domain.redirectionevent.vo.GetRedirectionEventOutputVo;
+import ssgssak.ssgpointappevent.domain.redirectionevent.vo.UpdateRedirectionEventInputVo;
 
 @RestController
 @RequestMapping("/api/v1/event/redirection")
@@ -27,17 +27,17 @@ public class RedirectionEventController { // 페이지 이동 이벤트
 
     // 1. 이벤트 생성
     @PostMapping("/admin")
-    public void createRedirectionEvent(@RequestBody CreateRedirectionEventVo createRedirectionEventVo){
-        CreateRedirectionEventDto createRedirectionEventDto = modelMapper.map(createRedirectionEventVo,
+    public void createRedirectionEvent(@RequestBody CreateRedirectionEventInputVo createRedirectionEventInputVo){
+        CreateRedirectionEventDto createRedirectionEventDto = modelMapper.map(createRedirectionEventInputVo,
                 CreateRedirectionEventDto.class);
         redirectionEventService.createRedirectionEvent(createRedirectionEventDto);
     }
 
     // 2. 이벤트 정보 변경
     @PutMapping("/admin")
-    public void updateRedirectionEvent(@RequestBody UpdateRedirectionEventVo updateRedirectionEventVo,
+    public void updateRedirectionEvent(@RequestBody UpdateRedirectionEventInputVo updateRedirectionEventInputVo,
                                        @RequestParam(name = "id") Long eventListId){
-        UpdateRedirectionEventDto updateRedirectionEventDto = modelMapper.map(updateRedirectionEventVo,
+        UpdateRedirectionEventDto updateRedirectionEventDto = modelMapper.map(updateRedirectionEventInputVo,
                 UpdateRedirectionEventDto.class);
         redirectionEventService.updateRedirectionEvent(updateRedirectionEventDto, eventListId);
     }
@@ -49,9 +49,9 @@ public class RedirectionEventController { // 페이지 이동 이벤트
 
     // 1. 이벤트 조회
     @GetMapping("")
-    public ResponseEntity<GetRedirectionEventVo> getRedirectionEvent(@RequestParam(name = "id") Long eventListId) {
+    public ResponseEntity<GetRedirectionEventOutputVo> getRedirectionEvent(@RequestParam(name = "id") Long eventListId) {
         GetRedirectionEventDto getRedirectionEventDto = redirectionEventService.getRedirectionEvent(eventListId);
-        GetRedirectionEventVo getRedirectionEventVo = modelMapper.map(getRedirectionEventDto, GetRedirectionEventVo.class);
-        return new ResponseEntity<>(getRedirectionEventVo, HttpStatus.OK);
+        GetRedirectionEventOutputVo getRedirectionEventOutputVo = modelMapper.map(getRedirectionEventDto, GetRedirectionEventOutputVo.class);
+        return new ResponseEntity<>(getRedirectionEventOutputVo, HttpStatus.OK);
     }
 }

@@ -1,4 +1,4 @@
-package ssgssak.ssgpointappevent.domain.informationtypeevent.vo;
+package ssgssak.ssgpointappevent.domain.drawingevent.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetInformationTypeEventVo {
+public class GetDrawingEventDto {
     private Long eventListId;
     private String title;
     private String titleImageUrl;

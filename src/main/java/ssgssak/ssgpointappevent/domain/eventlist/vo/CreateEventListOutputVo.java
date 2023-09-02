@@ -4,14 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ssgssak.ssgpointappevent.domain.eventlist.entity.EventList;
 
-import java.util.List;
-
-@Getter
 @Builder
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-public class GetEventsVo {
-    List<EventList> events;
+@NoArgsConstructor
+public class CreateEventListOutputVo {
+    private Long eventListId;
 }

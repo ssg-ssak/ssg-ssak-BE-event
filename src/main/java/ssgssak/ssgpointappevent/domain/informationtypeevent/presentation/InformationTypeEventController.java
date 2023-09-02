@@ -9,9 +9,9 @@ import ssgssak.ssgpointappevent.domain.informationtypeevent.application.Informat
 import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.CreateInformationTypeEventDto;
 import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.GetInformationTypeEventDto;
 import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.UpdateInformationTypeEventDto;
-import ssgssak.ssgpointappevent.domain.informationtypeevent.vo.CreateInformationTypeEventVo;
-import ssgssak.ssgpointappevent.domain.informationtypeevent.vo.GetInformationTypeEventVo;
-import ssgssak.ssgpointappevent.domain.informationtypeevent.vo.UpdateInformationTypeEventVo;
+import ssgssak.ssgpointappevent.domain.informationtypeevent.vo.CreateInformationTypeEventInputVo;
+import ssgssak.ssgpointappevent.domain.informationtypeevent.vo.GetInformationTypeEventOutputVo;
+import ssgssak.ssgpointappevent.domain.informationtypeevent.vo.UpdateInformationTypeEventInputVo;
 
 @RestController
 @RequestMapping("/api/v1/event/information-type")
@@ -28,19 +28,19 @@ public class InformationTypeEventController {
 
     // 1. 새로운 이벤트 생성
     @PostMapping("/admin")
-    public void createInformationTypeEvent(@RequestBody CreateInformationTypeEventVo createInformationTypeEventVo){
+    public void createInformationTypeEvent(@RequestBody CreateInformationTypeEventInputVo createInformationTypeEventInputVo){
         CreateInformationTypeEventDto createInformationTypeEventDto = modelMapper.map(
-                createInformationTypeEventVo, CreateInformationTypeEventDto.class
+                createInformationTypeEventInputVo, CreateInformationTypeEventDto.class
         );
         informationTypeEventService.createInformationTypeEvent(createInformationTypeEventDto);
     }
 
     // 2. 이벤트 정보 변경(이벤트 이름, 이미지 변경)
     @PutMapping("/admin")
-    public void updateInformationTypeEvent(@RequestBody UpdateInformationTypeEventVo updateInformationTypeEventVo,
+    public void updateInformationTypeEvent(@RequestBody UpdateInformationTypeEventInputVo updateInformationTypeEventInputVo,
                                            @RequestParam(name = "id") Long eventListId) {
         UpdateInformationTypeEventDto updateInformationTypeEventDto = modelMapper.map(
-                updateInformationTypeEventVo, UpdateInformationTypeEventDto.class
+                updateInformationTypeEventInputVo, UpdateInformationTypeEventDto.class
         );
         informationTypeEventService.updateInformationTypeEvent(updateInformationTypeEventDto, eventListId);
     }
@@ -50,12 +50,12 @@ public class InformationTypeEventController {
     1. 이벤트 조회
      */
     @GetMapping("")
-    public ResponseEntity<GetInformationTypeEventVo> getInformationTypeEvent(@RequestParam(name = "id") Long eventListId){
+    public ResponseEntity<GetInformationTypeEventOutputVo> getInformationTypeEvent(@RequestParam(name = "id") Long eventListId){
         GetInformationTypeEventDto getInformationTypeEventDto =
                 informationTypeEventService.getInformationTypeEvent(eventListId);
-        GetInformationTypeEventVo getInformationTypeEventVo = modelMapper.map(
-                getInformationTypeEventDto, GetInformationTypeEventVo.class
+        GetInformationTypeEventOutputVo getInformationTypeEventOutputVo = modelMapper.map(
+                getInformationTypeEventDto, GetInformationTypeEventOutputVo.class
         );
-        return new ResponseEntity<>(getInformationTypeEventVo, HttpStatus.OK);
+        return new ResponseEntity<>(getInformationTypeEventOutputVo, HttpStatus.OK);
     }
 }
