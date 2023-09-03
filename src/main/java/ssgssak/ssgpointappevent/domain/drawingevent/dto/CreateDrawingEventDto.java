@@ -1,4 +1,4 @@
-package ssgssak.ssgpointappevent.domain.redirectionevent.dto;
+package ssgssak.ssgpointappevent.domain.drawingevent.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class GetRedirectionEventDto {
+public class CreateDrawingEventDto {
     private Long eventListId;
     private String title;
     private String titleImageUrl;
     private String contentsImageUrl;
-    private String redirectionUrl;
 }

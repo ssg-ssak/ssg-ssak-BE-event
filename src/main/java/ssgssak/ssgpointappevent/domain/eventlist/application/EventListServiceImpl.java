@@ -6,7 +6,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssgssak.ssgpointappevent.domain.eventlist.dto.CreateEventListDto;
-import ssgssak.ssgpointappevent.domain.eventlist.dto.ReadEventsDto;
+import ssgssak.ssgpointappevent.domain.eventlist.dto.GetEventsDto;
+import ssgssak.ssgpointappevent.domain.eventlist.dto.ReturnEventListIdDto;
 import ssgssak.ssgpointappevent.domain.eventlist.dto.UpdateEventListDto;
 import ssgssak.ssgpointappevent.domain.eventlist.entity.EventList;
 import ssgssak.ssgpointappevent.domain.eventlist.infrastructure.EventListRepository;
@@ -28,11 +29,13 @@ public class EventListServiceImpl {
      */
 
     // 1. 새로운 이벤트 생성
-    public Long createEventList(CreateEventListDto eventListInfoDto) {
+    public ReturnEventListIdDto createEventList(CreateEventListDto eventListInfoDto) {
         log.info("eventListInfoDto : " + eventListInfoDto);
         EventList newEvent = modelMapper.map(eventListInfoDto, EventList.class);
         eventListRepository.save(newEvent);
-        return newEvent.getId();
+        return ReturnEventListIdDto.builder()
+                .eventListId(newEvent.getId())
+                .build();
     }
 
     // 2. 이벤트 종료일 변경
@@ -44,19 +47,19 @@ public class EventListServiceImpl {
 
     // 3. 진행 이벤트 최신순으로 받아오기
     @Transactional(readOnly = true)
-    public ReadEventsDto getLatestEvents() {
+    public GetEventsDto getLatestEvents() {
         List<EventList> events = eventListRepository.findAllByIsOverOrderByStartDateDesc(false);
         log.info("events : " + events);
-        ReadEventsDto eventsDto = ReadEventsDto.builder().events(events).build();
+        GetEventsDto eventsDto = GetEventsDto.builder().events(events).build();
         return eventsDto;
     }
 
     // 4. 진행 이벤트 마감임박순으로 받아오기
     @Transactional(readOnly = true)
-    public ReadEventsDto getImminentEvents() {
+    public GetEventsDto getImminentEvents() {
         List<EventList> events = eventListRepository.findAllByIsOverOrderByEndDateAsc(false);
         log.info("events : " + events);
-        ReadEventsDto eventsDto = ReadEventsDto.builder().events(events).build();
+        GetEventsDto eventsDto = GetEventsDto.builder().events(events).build();
         return eventsDto;
     }
 }

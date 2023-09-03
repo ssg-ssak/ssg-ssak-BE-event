@@ -3,7 +3,7 @@ package ssgssak.ssgpointappevent.domain.redirectionevent.vo;
 import lombok.Getter;
 
 @Getter
-public class UpdateRedirectionEventVo {
+public class UpdateRedirectionEventInputVo {
     private String title;
     private String titleImageUrl;
     private String contentsImageUrl;

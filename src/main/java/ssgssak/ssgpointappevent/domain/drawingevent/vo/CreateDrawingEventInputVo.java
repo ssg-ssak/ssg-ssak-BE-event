@@ -1,12 +1,11 @@
-package ssgssak.ssgpointappevent.domain.redirectionevent.vo;
+package ssgssak.ssgpointappevent.domain.drawingevent.vo;
 
 import lombok.Getter;
 
 @Getter
-public class CreateRedirectionEventVo {
+public class CreateDrawingEventInputVo {
     private Long eventListId;
     private String title;
     private String titleImageUrl;
     private String contentsImageUrl;
-    private String redirectionUrl;
 }

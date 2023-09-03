@@ -12,6 +12,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReadEventsDto {
+public class GetEventsDto {
     private List<EventList> events;
 }

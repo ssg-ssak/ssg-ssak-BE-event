@@ -10,7 +10,7 @@ import java.time.LocalDate;
 종료 여부는 관리자가 직접 수정하는 것이 아닌 종료일이 임박하면 따로 종료처리하는 로직 구현.
  */
 @Getter
-public class UpdateEventListVo {
+public class UpdateEventListInputVo {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 }

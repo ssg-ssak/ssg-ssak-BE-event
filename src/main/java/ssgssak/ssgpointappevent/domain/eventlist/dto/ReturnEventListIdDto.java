@@ -1,4 +1,4 @@
-package ssgssak.ssgpointappevent.domain.eventlist.vo;
+package ssgssak.ssgpointappevent.domain.eventlist.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,9 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Builder
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReturnEventListIdVo {
+@Getter
+public class ReturnEventListIdDto {
     private Long eventListId;
 }

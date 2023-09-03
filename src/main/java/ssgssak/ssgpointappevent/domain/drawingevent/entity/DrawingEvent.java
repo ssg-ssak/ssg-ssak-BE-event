@@ -1,10 +1,9 @@
 package ssgssak.ssgpointappevent.domain.drawingevent.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Builder
@@ -27,4 +26,10 @@ public class DrawingEvent {
 
     @Column(nullable = false, name = "contents_image_url")
     private String contentsImageUrl;
+
+    public void updateDrawingEvent(String title, String titleImageUrl, String contentsImageUrl){
+        this.title = title;
+        this.titleImageUrl = titleImageUrl;
+        this.contentsImageUrl = contentsImageUrl;
+    }
 }
