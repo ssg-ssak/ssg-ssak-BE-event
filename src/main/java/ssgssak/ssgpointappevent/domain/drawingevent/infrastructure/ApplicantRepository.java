@@ -10,6 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ApplicantRepository extends JpaRepository<Applicant, Long> {
-    List<Applicant> findByDrawingEventId(Long drawingEventId);
-    Optional<Applicant> findByUuid(String uuid);
+    Applicant findByDrawingEventIdAndUuid(Long drawingEventId, String uuid);
 }
