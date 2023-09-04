@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ssgssak.ssgpointappevent.domain.drawingevent.entity.DrawingEvent;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApplyDrawingEventDto {
+public class UpdateDrawingEventInputDto {
     private Long drawingEventId;
-    private String uuid;
-    private Boolean isWinner;
+    private String title;
+    private String titleImageUrl;
+    private String contentsImageUrl;
 }

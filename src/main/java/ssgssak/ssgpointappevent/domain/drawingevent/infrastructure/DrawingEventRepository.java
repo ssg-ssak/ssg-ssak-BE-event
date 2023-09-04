@@ -6,5 +6,4 @@ import ssgssak.ssgpointappevent.domain.drawingevent.entity.DrawingEvent;
 
 @Repository
 public interface DrawingEventRepository extends JpaRepository<DrawingEvent, Long> {
-    DrawingEvent findByEventListId(Long eventListId);
 }

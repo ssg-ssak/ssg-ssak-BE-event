@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public class CreateDrawingEventDto {
-    private Long eventListId;
-    private String title;
-    private String titleImageUrl;
-    private String contentsImageUrl;
+public class ApplyDrawingEventInputDto {
+    private Long drawingEventId;
+    private String uuid;
+    private Boolean isWinner;
 }
