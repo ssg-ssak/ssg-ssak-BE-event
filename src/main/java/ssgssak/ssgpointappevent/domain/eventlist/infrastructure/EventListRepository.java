@@ -14,4 +14,6 @@ public interface EventListRepository extends JpaRepository<EventList, Long> {
     // 2. 진행중인 이벤트 마감일 오름차순으로 조회(마감임박순)
     List<EventList> findAllByIsOverOrderByEndDateAsc(Boolean isOver);
 
+    // 3. 종료여부로 이벤트 전체 조회하기
+    List<EventList> findAllByIsOver(Boolean isOver);
 }

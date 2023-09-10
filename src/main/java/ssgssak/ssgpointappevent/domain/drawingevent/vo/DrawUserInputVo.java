@@ -1,10 +1,11 @@
 package ssgssak.ssgpointappevent.domain.drawingevent.vo;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
-public class UpdateDrawingEventInputVo {
+@ToString
+public class DrawUserInputVo {
     private Long drawingEventId;
-    private String title;
-    private String contentsImageUrl;
+    private int numberOfWinners;
 }

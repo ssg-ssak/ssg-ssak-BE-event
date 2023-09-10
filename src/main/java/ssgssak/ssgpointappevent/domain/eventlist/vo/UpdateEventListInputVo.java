@@ -11,6 +11,7 @@ import java.time.LocalDate;
  */
 @Getter
 public class UpdateEventListInputVo {
+    private Long eventListId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
 }

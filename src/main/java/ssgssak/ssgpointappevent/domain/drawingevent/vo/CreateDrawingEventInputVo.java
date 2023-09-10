@@ -6,6 +6,5 @@ import lombok.Getter;
 public class CreateDrawingEventInputVo {
     private Long eventListId;
     private String title;
-    private String titleImageUrl;
     private String contentsImageUrl;
 }

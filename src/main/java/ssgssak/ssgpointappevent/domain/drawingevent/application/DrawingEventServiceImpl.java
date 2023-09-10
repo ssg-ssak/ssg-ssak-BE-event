@@ -1,23 +1,25 @@
 package ssgssak.ssgpointappevent.domain.drawingevent.application;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssgssak.ssgpointappevent.domain.drawingevent.dto.ApplyDrawingEventInputDto;
-import ssgssak.ssgpointappevent.domain.drawingevent.dto.CreateDrawingEventInputDto;
-import ssgssak.ssgpointappevent.domain.drawingevent.dto.GetDrawingEventOutputDto;
-import ssgssak.ssgpointappevent.domain.drawingevent.dto.UpdateDrawingEventInputDto;
+import ssgssak.ssgpointappevent.domain.drawingevent.dto.*;
 import ssgssak.ssgpointappevent.domain.drawingevent.entity.Applicant;
 import ssgssak.ssgpointappevent.domain.drawingevent.entity.DrawingEvent;
 import ssgssak.ssgpointappevent.domain.drawingevent.infrastructure.ApplicantRepository;
 import ssgssak.ssgpointappevent.domain.drawingevent.infrastructure.DrawingEventRepository;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class DrawingEventServiceImpl {
     private final DrawingEventRepository drawingEventRepository;
     private final ModelMapper modelMapper;
@@ -35,7 +37,6 @@ public class DrawingEventServiceImpl {
                 .orElseThrow(() -> new IllegalArgumentException("해당 이벤트가 존재하지 않습니다."));
         drawingEvent.updateDrawingEvent(
                 updateDrawingEventInputDto.getTitle(),
-                updateDrawingEventInputDto.getTitleImageUrl(),
                 updateDrawingEventInputDto.getContentsImageUrl()
         );
     }
@@ -64,7 +65,11 @@ public class DrawingEventServiceImpl {
             throw new IllegalArgumentException("이미 응모한 이벤트입니다.");
         }
         else {
-            Applicant applicant = modelMapper.map(applyDrawingEventInputDto, Applicant.class);
+            Applicant applicant = Applicant.builder()
+                    .drawingEventId(applyDrawingEventInputDto.getDrawingEventId())
+                    .uuid(applyDrawingEventInputDto.getUuid())
+                    .isWinner(false)
+                    .build();
             applicantRepository.save(applicant);
         };
     }
@@ -79,5 +84,23 @@ public class DrawingEventServiceImpl {
     public Applicant checkDuplicateApplicant(Long drawingEventId, String uuid) {
         // applicant 데이터 중에 uuid/drawingEventListId가 일치하는 참여자가 있는지 체크
         return applicantRepository.findByDrawingEventIdAndUuid(drawingEventId, uuid);
+    }
+
+    // 5. 유저 추첨하기(추첨 결과를 applicant에 저장한다.)
+    public DrawUserOutputDto drawUser(DrawUserInputDto drawUserInputDto) {
+        List<Applicant> applicantList = applicantRepository.findAllByDrawingEventId(
+                drawUserInputDto.getDrawingEventId());
+        Collections.shuffle(applicantList);
+        int winnerCnt = drawUserInputDto.getNumberOfWinners(); // 뽑아야 할 당첨자 수
+        ArrayList<Applicant> winnerList = new ArrayList<>(); // 당첨자가 들어갈 리스트
+        // n명의 당첨자 선별하기
+        for(int i = 0; i < winnerCnt; i++){
+            Applicant applicant = applicantList.get(i);
+            applicant.applicantIsWinner(); // 당첨여부 true로 변경
+            winnerList.add(applicant);
+        }
+        return DrawUserOutputDto.builder()
+                .winnerList(winnerList)
+                .build();
     }
 }

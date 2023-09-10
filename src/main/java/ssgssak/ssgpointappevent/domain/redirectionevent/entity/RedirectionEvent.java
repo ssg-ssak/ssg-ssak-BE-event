@@ -13,7 +13,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RedirectionEvent { // 페이지 이동형 이벤트
-    // 식별 관계 매핑
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,9 +23,6 @@ public class RedirectionEvent { // 페이지 이동형 이벤트
     @Column(nullable = false, name = "title")
     private String title;
 
-    @Column(nullable = false, name = "title_image_url")
-    private String titleImageUrl;
-
     @Column(nullable = false, name = "contents_image_url")
     private String contentsImageUrl;
 
@@ -35,7 +31,6 @@ public class RedirectionEvent { // 페이지 이동형 이벤트
 
     public void updateRedirectionEvent(String title, String titleImageUrl, String contentsImageUrl, String redirectionUrl) {
         this.title = title;
-        this.titleImageUrl = titleImageUrl;
         this.contentsImageUrl = contentsImageUrl;
         this.redirectionUrl = redirectionUrl;
     }

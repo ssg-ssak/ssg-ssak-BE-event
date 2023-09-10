@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ssgssak.ssgpointappevent.domain.redirectionevent.application.RedirectionEventServiceImpl;
-import ssgssak.ssgpointappevent.domain.redirectionevent.dto.CreateRedirectionEventDto;
+import ssgssak.ssgpointappevent.domain.redirectionevent.dto.CreateRedirectionEventInputDto;
 import ssgssak.ssgpointappevent.domain.redirectionevent.dto.GetRedirectionEventDto;
 import ssgssak.ssgpointappevent.domain.redirectionevent.dto.UpdateRedirectionEventDto;
 import ssgssak.ssgpointappevent.domain.redirectionevent.vo.CreateRedirectionEventInputVo;
@@ -28,9 +28,9 @@ public class RedirectionEventController { // 페이지 이동 이벤트
     // 1. 이벤트 생성
     @PostMapping("/admin")
     public void createRedirectionEvent(@RequestBody CreateRedirectionEventInputVo createRedirectionEventInputVo){
-        CreateRedirectionEventDto createRedirectionEventDto = modelMapper.map(createRedirectionEventInputVo,
-                CreateRedirectionEventDto.class);
-        redirectionEventService.createRedirectionEvent(createRedirectionEventDto);
+        CreateRedirectionEventInputDto createRedirectionEventInputDto = modelMapper.map(createRedirectionEventInputVo,
+                CreateRedirectionEventInputDto.class);
+        redirectionEventService.createRedirectionEvent(createRedirectionEventInputDto);
     }
 
     // 2. 이벤트 정보 변경

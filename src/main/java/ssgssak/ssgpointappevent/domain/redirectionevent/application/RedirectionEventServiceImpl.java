@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import ssgssak.ssgpointappevent.domain.redirectionevent.dto.CreateRedirectionEventDto;
+import ssgssak.ssgpointappevent.domain.redirectionevent.dto.CreateRedirectionEventInputDto;
 import ssgssak.ssgpointappevent.domain.redirectionevent.dto.GetRedirectionEventDto;
 import ssgssak.ssgpointappevent.domain.redirectionevent.dto.UpdateRedirectionEventDto;
 import ssgssak.ssgpointappevent.domain.redirectionevent.entity.RedirectionEvent;
@@ -25,8 +25,8 @@ public class RedirectionEventServiceImpl {
      */
 
     // 1. 새로운 이벤트 생성
-    public void createRedirectionEvent(CreateRedirectionEventDto createRedirectionEventDto) {
-        RedirectionEvent redirectionEvent = modelMapper.map(createRedirectionEventDto, RedirectionEvent.class);
+    public void createRedirectionEvent(CreateRedirectionEventInputDto createRedirectionEventInputDto) {
+        RedirectionEvent redirectionEvent = modelMapper.map(createRedirectionEventInputDto, RedirectionEvent.class);
         redirectionEventRepository.save(redirectionEvent);
     }
 
