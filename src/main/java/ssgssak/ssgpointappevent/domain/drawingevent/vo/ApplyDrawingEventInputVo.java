@@ -8,5 +8,5 @@ import ssgssak.ssgpointappevent.domain.drawingevent.entity.DrawingEvent;
 public class ApplyDrawingEventInputVo {
     private Long drawingEventId;
     private String uuid;
-    private Boolean isWinner;
+//    private Boolean isWinner;
 }

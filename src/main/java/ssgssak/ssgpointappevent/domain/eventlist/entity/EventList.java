@@ -25,6 +25,9 @@ public class EventList {
     @Column(nullable = false, name = "end_date")
     private LocalDate endDate;
 
+    @Column(nullable = false, name = "remain_days")
+    private Integer remainDays;
+
     @Column(nullable = false, name = "event_type")
     @Enumerated(EnumType.STRING)
     private EventType eventType;
@@ -32,7 +35,16 @@ public class EventList {
     @Column(nullable = false, name = "is_over")
     private Boolean isOver;
 
+    @Column(nullable = false, name = "title_image_url")
+    private String titleImageUrl;
+
     public void changeEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+    public void updateRemainDays() {
+        this.remainDays = LocalDate.now().until(endDate).getDays();
+    }
+    public void updateIsOverToTrue() {
+        this.isOver = true;
     }
 }

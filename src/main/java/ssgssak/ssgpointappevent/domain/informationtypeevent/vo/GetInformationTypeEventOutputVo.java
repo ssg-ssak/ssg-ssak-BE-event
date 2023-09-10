@@ -12,6 +12,5 @@ import lombok.NoArgsConstructor;
 public class GetInformationTypeEventOutputVo {
     private Long eventListId;
     private String title;
-    private String titleImageUrl;
     private String contentsImageUrl;
 }

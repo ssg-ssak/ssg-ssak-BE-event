@@ -21,15 +21,11 @@ public class DrawingEvent {
     @Column(nullable = false, name = "title")
     private String title;
 
-    @Column(nullable = false, name = "title_image_url")
-    private String titleImageUrl;
-
     @Column(nullable = false, name = "contents_image_url")
     private String contentsImageUrl;
 
-    public void updateDrawingEvent(String title, String titleImageUrl, String contentsImageUrl){
+    public void updateDrawingEvent(String title, String contentsImageUrl){
         this.title = title;
-        this.titleImageUrl = titleImageUrl;
         this.contentsImageUrl = contentsImageUrl;
     }
 }

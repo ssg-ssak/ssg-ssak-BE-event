@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.CreateInformationTypeEventDto;
-import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.GetInformationTypeEventDto;
-import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.UpdateInformationTypeEventDto;
+import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.CreateInformationTypeEventInputDto;
+import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.GetInformationTypeEventOutputDto;
+import ssgssak.ssgpointappevent.domain.informationtypeevent.dto.UpdateInformationTypeEventInputDto;
 import ssgssak.ssgpointappevent.domain.informationtypeevent.entity.InformationTypeEvent;
 import ssgssak.ssgpointappevent.domain.informationtypeevent.infrastructure.InformationTypeEventRepository;
 
@@ -25,26 +25,26 @@ public class InformationTypeEventServiceImpl {
      */
 
     // 1. 새로운 이벤트 생성
-    public void createInformationTypeEvent(CreateInformationTypeEventDto createInformationTypeEventDto){
-        log.info("createInformationTypeEventDto : " + createInformationTypeEventDto);
-        InformationTypeEvent informationTypeEvent = modelMapper.map(createInformationTypeEventDto, InformationTypeEvent.class);
+    public void createInformationTypeEvent(CreateInformationTypeEventInputDto createInformationTypeEventInputDto){
+        log.info("createInformationTypeEventInputDto : " + createInformationTypeEventInputDto);
+        InformationTypeEvent informationTypeEvent = modelMapper.map(createInformationTypeEventInputDto, InformationTypeEvent.class);
         informationTypeEventRepository.save(informationTypeEvent);
     }
 
     // 2. 이벤트 조회
     @Transactional(readOnly = true)
-    public GetInformationTypeEventDto getInformationTypeEvent(Long eventListId){
+    public GetInformationTypeEventOutputDto getInformationTypeEvent(Long eventListId){
         InformationTypeEvent informationTypeEvent = informationTypeEventRepository.findByEventListId(eventListId);
-        return modelMapper.map(informationTypeEvent, GetInformationTypeEventDto.class);
+        return modelMapper.map(informationTypeEvent, GetInformationTypeEventOutputDto.class);
     }
 
     // 3. 이벤트 정보 변경(이벤트 이름, 이미지 변경)
-    public void updateInformationTypeEvent(UpdateInformationTypeEventDto updateInformationTypeEventDto, Long eventListId){
-        InformationTypeEvent informationTypeEvent = informationTypeEventRepository.findByEventListId(eventListId);
+    public void updateInformationTypeEvent(UpdateInformationTypeEventInputDto updateInformationTypeEventInputDto){
+        InformationTypeEvent informationTypeEvent =
+                informationTypeEventRepository.findByEventListId(updateInformationTypeEventInputDto.getEventListId());
         informationTypeEvent.updateInformationTypeEvent(
-                updateInformationTypeEventDto.getTitle(),
-                updateInformationTypeEventDto.getTitleImageUrl(),
-                updateInformationTypeEventDto.getContentsImageUrl()
+                updateInformationTypeEventInputDto.getTitle(),
+                updateInformationTypeEventInputDto.getContentsImageUrl()
         );
     }
 }

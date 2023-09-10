@@ -1,10 +1,7 @@
 package ssgssak.ssgpointappevent.domain.drawingevent.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ssgssak.ssgpointappevent.global.common.entity.BaseTimeEntity;
 
 @Entity
@@ -12,6 +9,7 @@ import ssgssak.ssgpointappevent.global.common.entity.BaseTimeEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@ToString
 public class Applicant extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class UpdateInformationTypeEventInputVo {
+    private Long eventListId;
     private String title;
-    private String titleImageUrl;
     private String contentsImageUrl;
 }

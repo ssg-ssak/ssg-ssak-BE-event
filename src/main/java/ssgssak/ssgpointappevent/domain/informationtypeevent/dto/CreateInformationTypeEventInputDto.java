@@ -1,4 +1,4 @@
-package ssgssak.ssgpointappevent.domain.redirectionevent.dto;
+package ssgssak.ssgpointappevent.domain.informationtypeevent.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class CreateRedirectionEventDto {
+@AllArgsConstructor
+public class CreateInformationTypeEventInputDto {
     private Long eventListId;
     private String title;
-    private String titleImageUrl;
     private String contentsImageUrl;
-    private String redirectionUrl;
 }

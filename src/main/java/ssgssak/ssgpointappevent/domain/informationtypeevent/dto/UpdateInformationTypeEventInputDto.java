@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class GetInformationTypeEventDto {
+@AllArgsConstructor
+public class UpdateInformationTypeEventInputDto {
     private Long eventListId;
     private String title;
-    private String titleImageUrl;
     private String contentsImageUrl;
 }

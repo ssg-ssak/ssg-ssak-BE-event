@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ssgssak.ssgpointappevent.domain.eventlist.entity.EventType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -12,9 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class CreateEventListDto {
-    private LocalDate startDate;
+public class UpdateEventListInputDto {
+    private Long eventListId;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    private EventType eventType;
-    private Boolean isOver;
 }
