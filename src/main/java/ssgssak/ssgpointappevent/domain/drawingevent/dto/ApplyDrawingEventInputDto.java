@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ApplyDrawingEventInputDto {
     private Long drawingEventId;
-    private String uuid;
 }

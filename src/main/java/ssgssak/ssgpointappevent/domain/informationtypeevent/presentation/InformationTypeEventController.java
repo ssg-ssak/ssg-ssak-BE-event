@@ -21,7 +21,6 @@ public class InformationTypeEventController {
     private final ModelMapper modelMapper;
     /*
     아래는 어드민 API
-    //todo: 관리자 인증 방식 정하기
     1. 새로운 이벤트 생성
     2. 이벤트 정보 변경(이벤트 이름, 이미지 변경)
      */
