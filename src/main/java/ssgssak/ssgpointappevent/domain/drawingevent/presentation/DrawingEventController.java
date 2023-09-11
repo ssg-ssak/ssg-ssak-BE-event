@@ -10,6 +10,8 @@ import ssgssak.ssgpointappevent.domain.drawingevent.application.DrawingEventServ
 import ssgssak.ssgpointappevent.domain.drawingevent.dto.*;
 import ssgssak.ssgpointappevent.domain.drawingevent.vo.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api/v1/event/drawing")
 @RequiredArgsConstructor
@@ -70,11 +72,10 @@ public class DrawingEventController { // 추첨 이벤트
     }
 
     // 2. 이벤트 응모하기(응모를 하면 applicant에 유저 정보를 추가하는데, 이 때 필요한 uuid는 context holder에서 가져온다.)
-    //todo: uuid contextholder에서 가져오기.
     @PostMapping("")
-    public void applyDrawingEvent(@RequestBody ApplyDrawingEventInputVo applyDrawingEventInputVo){
+    public void applyDrawingEvent(@RequestBody ApplyDrawingEventInputVo applyDrawingEventInputVo, Principal principal){
         ApplyDrawingEventInputDto applyDrawingEventInputDto = modelMapper.map(applyDrawingEventInputVo,
                 ApplyDrawingEventInputDto.class);
-        drawingEventService.applyDrawingEvent(applyDrawingEventInputDto);
+        drawingEventService.applyDrawingEvent(applyDrawingEventInputDto, principal.getName());
     }
 }

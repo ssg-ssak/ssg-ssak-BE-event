@@ -26,7 +26,6 @@ public class EventListController {
 
     /*
     아래는 어드민 API
-    // todo: 관리자 인증 방식 정하기
     1. 새로운 이벤트 생성
     2. 이벤트 정보수정(종료일 변경)
     */

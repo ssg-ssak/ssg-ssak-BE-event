@@ -52,22 +52,21 @@ public class DrawingEventServiceImpl {
     }
 
     // 4. 이벤트 응모하기(applicant 데이터 생성)
-    //todo: uuid 불러오는 로직 추가하기(지금은 임시로 입력), 시큐리티에서 어떻게 불러오는지 알아보기.
-    public void applyDrawingEvent(ApplyDrawingEventInputDto applyDrawingEventInputDto) {
+    public void applyDrawingEvent(ApplyDrawingEventInputDto applyDrawingEventInputDto, String uuid) {
         // drawingEventId에 해당하는 DrawingEvent가 존재하는지 먼저 체크.
         if(!checkDrawingEventExist(applyDrawingEventInputDto.getDrawingEventId())){
             throw new IllegalArgumentException("해당 이벤트가 존재하지 않습니다.");
         }
         // 중복 참여 체크(uuid가 일치하는 참여자가 있는지 체크)
         if(checkDuplicateApplicant(
-                applyDrawingEventInputDto.getDrawingEventId(), applyDrawingEventInputDto.getUuid()) != null
+                applyDrawingEventInputDto.getDrawingEventId(), uuid) != null
         ){
             throw new IllegalArgumentException("이미 응모한 이벤트입니다.");
         }
         else {
             Applicant applicant = Applicant.builder()
                     .drawingEventId(applyDrawingEventInputDto.getDrawingEventId())
-                    .uuid(applyDrawingEventInputDto.getUuid())
+                    .uuid(uuid)
                     .isWinner(false)
                     .build();
             applicantRepository.save(applicant);
