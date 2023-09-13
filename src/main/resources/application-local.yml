@@ -6,11 +6,11 @@ spring:
     activate:
       on-profile: local
 
-jpa:
-  hibernate:
-    ddl-auto: update
-    format_sql: true
-  show-sql: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format_sql: true
+    show-sql: true
 
 # Replication 설정
 datasource:
