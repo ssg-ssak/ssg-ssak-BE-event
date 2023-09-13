@@ -13,21 +13,21 @@ spring:
     show-sql: true
 
 # Replication 설정
-datasource:
-  master:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/ssgevent
-      read-only: false
-      username: root
-      password: 1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
-  slave:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/ssgevent
-      read-only: true
-      username: root
-      password: 1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    master:
+      hikari:
+        jdbc-url: jdbc:mysql://localhost:3306/ssgevent
+        read-only: false
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    slave:
+      hikari:
+        jdbc-url: jdbc:mysql://localhost:3306/ssgevent
+        read-only: true
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
 
 
 
