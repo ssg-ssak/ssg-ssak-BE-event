@@ -39,6 +39,8 @@ dependencies {
 			'io.jsonwebtoken:jjwt-jackson:0.11.5'
 	// 스웨거 설정
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+	//ImmutableMap
+	implementation 'com.google.guava:guava:30.1.1-jre'
 }
 
 tasks.named('test') {
