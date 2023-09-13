@@ -1,0 +1,38 @@
+server:
+  port: 8003
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+jpa:
+  hibernate:
+    ddl-auto: update
+    format_sql: true
+  show-sql: true
+
+# Replication 설정
+datasource:
+  master:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/ssgevent
+      read-only: false
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  slave:
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/ssgevent
+      read-only: true
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+
+JWT:
+  secret-key: 95a43ad8448bdf0b843307aba994365a275c6cdde0210076c397331461a8af36a12bde89cdd4fc200519c94b6a57532f7e826a892ba86869c9bb73ff11b7b3905ea59714e88e56a2a9bf8386f5db0c7ec76112c5072431af7f474491939033816142f01db245e9c056856447a017b1c4aac2fc801efacd318b371516831eb2dc
+  expiration-time: 14400000000000 # ms단위로 적어야함, 14400000 -> 4h
+  header: Authorization
+  prefix: Bearer
