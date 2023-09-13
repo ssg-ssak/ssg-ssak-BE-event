@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class GetRedirectionEventDto {
     private Long eventListId;
     private String title;
-    private String titleImageUrl;
     private String contentsImageUrl;
     private String redirectionUrl;
 }
