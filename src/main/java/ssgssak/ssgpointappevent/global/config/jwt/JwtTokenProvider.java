@@ -20,7 +20,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 @Slf4j
 public class JwtTokenProvider {
-    private final Environment env; // application.yml에서 설정한 설정값
+//    private final Environment env; // application.yml에서 설정한 설정값
     @Value("${jwt.secret-key}")
     private String secretKey;
 
