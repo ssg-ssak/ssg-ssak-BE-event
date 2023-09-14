@@ -78,4 +78,20 @@ public class DrawingEventController { // 추첨 이벤트
                 ApplyDrawingEventInputDto.class);
         drawingEventService.applyDrawingEvent(applyDrawingEventInputDto, principal.getName());
     }
+
+    // 3. 마이 이벤트 조회하기(참여한 이벤트)
+    @GetMapping("/my-event/applied/ids")
+    public ResponseEntity<GetAppliedEventsOutputVo> getAppliedEvents(Principal principal){
+        GetAppliedEventsOutputDto getAppliedEventsOutputDto =
+                drawingEventService.getAppliedEventsId(principal.getName());
+        GetAppliedEventsOutputVo getAppliedEventsOutputVo = modelMapper.map(getAppliedEventsOutputDto,
+                GetAppliedEventsOutputVo.class);
+        return new ResponseEntity<>(getAppliedEventsOutputVo, HttpStatus.OK);
+    }
+
+    // 4. 마이 이벤트 조회하기(당첨 확인)
+//    @GetMapping("/my-event/drawed")
+//    public ResponseEntity<> getMyEventsDrawed(Principal principal){
+//
+//    }
 }

@@ -7,6 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import ssgssak.ssgpointappevent.global.common.exception.TokenExpiredException;
@@ -20,6 +21,8 @@ import java.util.function.Function;
 @Slf4j
 public class JwtTokenProvider {
     private final Environment env; // application.yml에서 설정한 설정값
+    @Value("${jwt.secret-key}")
+    private String secretKey;
 
     /**
      * TokenProvider
@@ -61,7 +64,7 @@ public class JwtTokenProvider {
 
     // 4. 토큰 key 디코드 : env에 저장된 키로, 들어온 토큰을 파싱
     private Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(env.getProperty("JWT.SECRET_KEY", String.class));
+        byte[] keyBytes = Decoders.BASE64.decode(secretKey); //(env.getProperty("JWT.SECRET_KEY", String.class));
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }
