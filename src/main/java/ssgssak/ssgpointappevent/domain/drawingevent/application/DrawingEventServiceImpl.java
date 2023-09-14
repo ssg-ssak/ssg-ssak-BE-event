@@ -102,4 +102,12 @@ public class DrawingEventServiceImpl {
                 .winnerList(winnerList)
                 .build();
     }
+
+    // 6.
+    public GetAppliedEventsOutputDto getAppliedEventsId(String uuid) {
+        List<Long> appliedEventsId = applicantRepository.findAllByUuid(uuid);
+        return GetAppliedEventsOutputDto.builder()
+                .appliedEventIds(appliedEventsId)
+                .build();
+    }
 }
