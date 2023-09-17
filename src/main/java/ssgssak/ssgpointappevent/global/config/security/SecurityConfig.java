@@ -52,25 +52,4 @@ public class SecurityConfig {
                 .addFilterBefore(exceptionHandlerFilter, OAuth2AuthorizationRequestRedirectFilter.class);
         return http.build();
     }
-
-    // security에서 cors설정
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true); // 쿠키사용 허용
-        configuration.setAllowedOriginPatterns(List.of("*")); // 출처 허용
-        configuration.setAllowedMethods(List.of(
-                HttpMethod.GET.name(),
-                HttpMethod.POST.name(),
-                HttpMethod.PUT.name(),
-                HttpMethod.PATCH.name(),
-                HttpMethod.DELETE.name(),
-                HttpMethod.OPTIONS.name())); // 메소드 허용
-        configuration.setAllowedHeaders(List.of("*")); // 요청헤더 허용
-        configuration.setExposedHeaders(List.of("*")); // 응답헤더 허용
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 }
