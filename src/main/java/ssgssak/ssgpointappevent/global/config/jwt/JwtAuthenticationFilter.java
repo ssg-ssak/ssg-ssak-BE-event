@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -26,6 +27,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization"); // 토큰을 받아오는 필드는, request 헤더에서 "Authorization"임
         final String jwt;  // header에서 가져올 jwt 토큰값임. jwt 토큰값은 Header, Payload, Signature가 '.' 으로 구분된 문자열 값임
         final String uuid; // uuid를 토큰에서 가져올것임
+
+        // preflight request라면 필터를 거치지 않도록 함
+        if (request.getMethod().equals(HttpMethod.OPTIONS.name()) &&
+            request.getHeader("Access-Control-Request-Method") != null &&
+            request.getHeader("Origin") != null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         // 헤더가 null이거나, "Bearer"로 시작하지 않는다면 토큰 인증을 진행하지 않음
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {

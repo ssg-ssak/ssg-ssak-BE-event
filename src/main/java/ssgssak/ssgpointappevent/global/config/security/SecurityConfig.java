@@ -39,8 +39,6 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // 인증 절차에 대한 설정을 시작 : 필터를 적용시키지 않을 url과, 적용시킬 url을 구분
                 .authorizeHttpRequests(authorizeHttpRequest -> authorizeHttpRequest
-                        .requestMatchers(HttpMethod.OPTIONS, "/**")
-                        .permitAll()
                         .requestMatchers(org.springframework.web.cors.CorsUtils::isPreFlightRequest)
                         .permitAll()
                         .requestMatchers("/api/v1/auth/sign-up","/api/v1/auth/log-in", "/swagger-ui/**", "/swagger-resources/**", "/api-docs/**")
@@ -53,26 +51,5 @@ public class SecurityConfig {
                 // filter단에서 발생하는 에러를 처리할 ExceptionHandlerFilter를 OAuth2필터 앞에 추가한다
                 .addFilterBefore(exceptionHandlerFilter, OAuth2AuthorizationRequestRedirectFilter.class);
         return http.build();
-    }
-
-    // security에서 cors설정
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true); // 쿠키사용 허용
-        configuration.setAllowedOriginPatterns(List.of("*")); // 출처 허용
-        configuration.setAllowedMethods(List.of(
-                HttpMethod.GET.name(),
-                HttpMethod.POST.name(),
-                HttpMethod.PUT.name(),
-                HttpMethod.PATCH.name(),
-                HttpMethod.DELETE.name(),
-                HttpMethod.OPTIONS.name())); // 메소드 허용
-        configuration.setAllowedHeaders(List.of("*")); // 요청헤더 허용
-        configuration.setExposedHeaders(List.of("*")); // 응답헤더 허용
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 }
